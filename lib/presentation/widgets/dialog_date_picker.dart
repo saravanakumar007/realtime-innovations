@@ -1,9 +1,9 @@
 import 'package:employee_list/consts/app_colors.dart';
 import 'package:employee_list/consts/app_text_styles.dart';
 import 'package:employee_list/presentation/widgets/custom_date_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 
 class DialogDatePicker {
@@ -76,8 +76,11 @@ class DialogDatePicker {
         return AlertDialog(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-          insetPadding:
-              const EdgeInsets.symmetric(horizontal: 20.0, vertical: 24.0),
+          insetPadding: kIsWeb
+              ? EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * 0.2,
+                  vertical: 24.0)
+              : EdgeInsets.symmetric(horizontal: 20.0, vertical: 24.0),
           content: ValueListenableBuilder<int>(
             valueListenable: valueNotifier,
             builder: (context, value, child) => Column(
@@ -99,6 +102,7 @@ class DialogDatePicker {
                     ]
                   ],
                 ),
+                if (kIsWeb) SizedBox(height: 20),
                 if (hasDefaultDateTime) ...[
                   Row(
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -177,9 +181,9 @@ class DialogDatePicker {
                                 onDateChanged(selectedDate);
                                 Navigator.of(context).pop();
                               } else {
-                                Fluttertoast.showToast(
-                                    msg:
-                                        "Selected Date should be greater than Start Date");
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    content: Text(
+                                        'Selected Date should be greater than Start Date')));
                               }
                             } else {
                               if (compareDate == null ||
@@ -188,9 +192,9 @@ class DialogDatePicker {
                                 onDateChanged(selectedDate);
                                 Navigator.of(context).pop();
                               } else {
-                                Fluttertoast.showToast(
-                                    msg:
-                                        "Selected Date should be less than End Date");
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    content: Text(
+                                        'Selected Date should be less than End Date')));
                               }
                             }
                           },
