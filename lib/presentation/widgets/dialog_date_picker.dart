@@ -78,7 +78,9 @@ class DialogDatePicker {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           insetPadding: kIsWeb
               ? EdgeInsets.symmetric(
-                  horizontal: MediaQuery.of(context).size.width * 0.2,
+                  horizontal: MediaQuery.of(context).size.width > 800
+                      ? MediaQuery.of(context).size.width * 0.2
+                      : 24,
                   vertical: 24.0)
               : EdgeInsets.symmetric(horizontal: 20.0, vertical: 24.0),
           content: ValueListenableBuilder<int>(

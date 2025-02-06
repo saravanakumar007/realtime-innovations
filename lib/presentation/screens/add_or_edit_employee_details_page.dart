@@ -247,7 +247,7 @@ class _AddOrEditEmployeeDetailsPageState
                             height: 20,
                             width: 20,
                           ),
-                          const SizedBox(width: 20),
+                          const SizedBox(width: 10),
                           Text(
                             isTodayDate
                                 ? 'Today'
@@ -300,7 +300,7 @@ class _AddOrEditEmployeeDetailsPageState
                             height: 20,
                             width: 20,
                           ),
-                          const SizedBox(width: 20),
+                          const SizedBox(width: 10),
                           Text(
                             endDate != null
                                 ? DateFormat("d MMM y").format(endDate!)
